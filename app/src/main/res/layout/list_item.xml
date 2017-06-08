@@ -1,0 +1,41 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    android:orientation="horizontal"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    android:padding="10dp">
+
+        <ImageView
+            android:layout_width="86dp"
+            android:layout_height="86dp"
+            android:src="@drawable/head"
+            android:id="@+id/im_view_cara"/>
+
+        <LinearLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:orientation="vertical"
+            android:layout_marginLeft="16dp"
+            android:layout_marginTop="36dp"
+            android:layout_marginStart="16dp">
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_nombre"
+                android:text="John Tim"
+                android:textStyle="bold"
+                android:gravity="center"
+                android:textSize="18sp"
+                android:layout_marginBottom="5dp"/>
+
+            <TextView
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:id="@+id/tv_fechas"
+                android:gravity="center"
+                android:text="1840 - 1890"/>
+
+    </LinearLayout>
+
+</LinearLayout>
