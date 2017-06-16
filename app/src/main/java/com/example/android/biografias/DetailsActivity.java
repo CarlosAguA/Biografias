@@ -9,10 +9,18 @@ import android.support.v7.widget.Toolbar;
 import android.view.Menu;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.ImageView;
 
 import de.hdodenhof.circleimageview.CircleImageView;
 
-public class DetailsActivity extends AppCompatActivity {
+public class DetailsActivity extends AppCompatActivity
+        implements AppBarLayout.OnOffsetChangedListener{
+
+    private static final int PERCENTAGE_TO_ANIMATE_AVATAR = 20;
+    private boolean mIsAvatarShown = true;
+
+    private ImageView mProfileImage;
+    private int mMaxScrollSize;
 
     private Rect mStart = new Rect();
 
@@ -26,6 +34,9 @@ public class DetailsActivity extends AppCompatActivity {
         Toolbar toolbar = (Toolbar) findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
 
+        AppBarLayout appbarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+        mProfileImage = (ImageView) findViewById(R.id.circle_image_view);
+
         final ActionBar actionBar = getSupportActionBar();
         if (actionBar != null) {
             actionBar.setTitle("Abby");
@@ -33,11 +44,37 @@ public class DetailsActivity extends AppCompatActivity {
             actionBar.setDisplayHomeAsUpEnabled(true);
         }
 
-        final View target = findViewById(R.id.circle_collapsed_target);
+        appbarLayout.addOnOffsetChangedListener(this);
+        mMaxScrollSize = appbarLayout.getTotalScrollRange();
 
-        final CircleImageView circleImageView = (CircleImageView) findViewById(R.id.circle_image_view);
 
-        AppBarLayout appBarLayout = (AppBarLayout) findViewById(R.id.app_bar);
+    }
+
+    @Override
+    public void onOffsetChanged(AppBarLayout appBarLayout, int verticalOffset) {
+
+        if (mMaxScrollSize == 0)
+            mMaxScrollSize = appBarLayout.getTotalScrollRange();
+
+        int percentage = (Math.abs(verticalOffset) * 100 / mMaxScrollSize );
+
+        if (percentage >= PERCENTAGE_TO_ANIMATE_AVATAR && mIsAvatarShown) {
+            mIsAvatarShown = false;
+
+            mProfileImage.animate()
+                    .scaleY(0).scaleX(0)
+                    .setDuration(100)
+                    .start();
+        }
+
+        if (percentage <= PERCENTAGE_TO_ANIMATE_AVATAR && !mIsAvatarShown) {
+            mIsAvatarShown = true;
+
+            mProfileImage.animate()
+                    .scaleY(1).scaleX(1)
+                    .start();
+        }
+
     }
 
     @Override

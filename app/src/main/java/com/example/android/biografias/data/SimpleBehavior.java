@@ -12,10 +12,10 @@ import com.example.android.biografias.R;
 import de.hdodenhof.circleimageview.CircleImageView;
 
 /**
- * Created by Paviliondm4 on 6/15/2017.
+ * Created by Paviliondm4 on 6/16/2017.
  */
 
-public class CollapsingBehavior extends CoordinatorLayout.Behavior<CircleImageView> {
+public class SimpleBehavior extends CoordinatorLayout.Behavior<CircleImageView> {
 
     private final static int X = 0;
     private final static int Y = 1;
@@ -28,10 +28,9 @@ public class CollapsingBehavior extends CoordinatorLayout.Behavior<CircleImageVi
 
     private int[] mTarget;
 
-    public CollapsingBehavior() {
-    }
+    public SimpleBehavior(){}
 
-    public CollapsingBehavior (Context context, AttributeSet attrs) {
+    public SimpleBehavior (Context context, AttributeSet attrs) {
 
         if (attrs != null) {
             TypedArray a = context.obtainStyledAttributes(attrs, R.styleable.CollapsingImageBehavior);
@@ -42,6 +41,7 @@ public class CollapsingBehavior extends CoordinatorLayout.Behavior<CircleImageVi
         if (mTargetId == 0) {
             throw new IllegalStateException("collapsedTarget attribute not specified on view for behavior");
         }
+
     }
 
     @Override
@@ -102,5 +102,6 @@ public class CollapsingBehavior extends CoordinatorLayout.Behavior<CircleImageVi
         }
 
     }
+
 
 }
